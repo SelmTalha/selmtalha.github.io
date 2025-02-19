@@ -2,7 +2,7 @@
 title: "Satrançta olasılık"
 layout: post
 date: 2020-02-29 11:57
-image: "/assets/blog/pawnrespect2.jpg"
+image: "https://selmtalha.github.io/assets/blog/pawnrespect2.jpg"
 headerImage: true
 tag: [satranç , chess , olasılık , person of interest ,shannon sayısı, selim talha çağlar]
 category: Satranç 

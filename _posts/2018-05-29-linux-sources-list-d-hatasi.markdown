@@ -4,7 +4,7 @@ layout: post
 date: 2018-05-29 03:27
 tag: [linux,terminal hataları,terminal,sources.list.d/ hatası]
 headerImage: true
-image: "/assets/blog/terminalbackls3.jpg"
+image: "https://selmtalha.github.io/assets/blog/terminalbackls3.jpg"
 description: "Linux /etc/apt/sources.list.d/ hatası kesin çözümü"
 category: [Teknoloji,Linux]
 author: SelmTalha

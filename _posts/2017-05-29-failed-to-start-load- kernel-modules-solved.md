@@ -8,7 +8,7 @@ tags: [fix kernel failed to start, failed start ,Failed to Start Load Kernel Mod
 math: true
 mermaid: true
 headerImage: true
-image: "/assets/blog/terminalbackls.jpg"
+image: "https://selmtalha.github.io/assets/blog/terminalbackls.jpg"
 ---
 
 # Linux’ta "Failed to Start Load Kernel Modules" Hatasının Çözümü

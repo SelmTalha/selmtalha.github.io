@@ -3,7 +3,7 @@ title: "Linux Dosya Sistemi"
 layout: post
 date: 2017-08-24 11:38
 headerImage: true
-image: "/assets/blog/terminalbackls2.jpg"
+image: "https://selmtalha.github.io/assets/blog/terminalbackls2.jpg"
 tag: [linux dosya sistemi, linux , ubuntu , dosya sistemleri ,ext2,ext3,selim talha çağlar]
 category: [Teknoloji,Linux]
 author: SelmTalha

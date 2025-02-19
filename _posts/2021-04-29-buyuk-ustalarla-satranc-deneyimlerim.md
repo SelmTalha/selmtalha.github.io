@@ -2,14 +2,14 @@
 title: Büyük Ustalarla Satranç Deneyimlerim
 description: Pandemi Döneminde büyük ustalarla oynadığım oyunlar ve analizlerim
 author: SelmTalha
-date: 2021-04-29 22:37:00 +0800
+date: 2021-04-29 22:37
 categories: [Satranç]
 tags: [satranç,büyükustalarla oyunlarım,selim talha çağlar oyunları,mortnoire,pandemi]
 pin: true
 math: true
 mermaid: true
 headerImage: true
-image: "/assets/blog/selimtalhacaglar_chess.jpg"
+image: "https://selmtalha.github.io/assets/blog/selimtalhacaglar_chess.jpg"
 ---
 <!-- 
 ![Desktop View](/posts/20190808/mockup.png){: width="972" height="589" .w-75 .normal} -->
@@ -22,7 +22,8 @@ Pandemi dönemi, çevrimiçi satranç etkinliklerinin yaygınlaşmasıyla birlik
 
 ### **Büyükusta Anish Giri ile Oyun (LOSE)**
 
-<iframe style='border: 0;' width='900px' height='600px' src='https://share.chessbase.com/SharedGames/frame/?p=98o5EQR+9ZutHcdV+itUsaCZSBAEA3sZgvNsJJGiCaTSK16vazwBJjvs2tD/5zDQ'></iframe>
+<iframe src="https://lichess.org/embed/game/ERd3IF4r?theme=auto&bg=auto#33"
+width=700 height=420 frameborder=1></iframe>
 
 Büyükusta Anish Giri ile oynadığım maç, satranç anlayışımı derinleştiren önemli bir deneyimdi. Giri'nin oyun tarzı, hem stratejik derinlik hem de yüksek seviyede hesap yapma gerektiren bir oyun biçimi sunuyor. Bu yüzden, onunla oynamak, sadece bir rakip değil, aynı zamanda bir öğretmenle oynuyor gibi hissettirdi.
 
@@ -34,7 +35,8 @@ Sonuç olarak, Giri ile oynadığım bu maç, kaybetmiş olsam da bana oyunumu g
 
 ### **GM Vahap Şanal ile Oyun (LOSE)**
 
-<iframe style='border: 0;' width='900px' height='600px' src='https://share.chessbase.com/SharedGames/frame/?p=98o5EQR+9ZutHcdV+itUsaCZSBAEA3sZgvNsJJGiCaTSK16vazwBJjvs2tD/5zDQ'></iframe>
+<iframe src="https://lichess.org/embed/game/oVDHBxKr?theme=auto&bg=auto"
+width=700 height=420 frameborder=1></iframe>
 
 GM Vahap Şanal, satrançta sadece agresif oyun tarzıyla değil, aynı zamanda derin stratejik anlayışı ve soğukkanlılığıyla da tanınır. Onunla oynadığım bu maç, bana çok değerli dersler sundu. Ancak, bu karşılaşma benim için hiç de çekişmeli geçmedi. Büyükustalarla oynarken hissettiğim heyecan ve stres, oyunum üzerinde olumsuz etkiler yarattı. Vahap Şanal'ın oyunundaki konumsal baskı ve taşları etkin kullanma becerisi, beni sürekli bir savunma pozisyonunda tutarak avantaj sağladı.
 
@@ -44,7 +46,8 @@ Sonraki hamlelerde, konumumda daha fazla zayıflık oluştu ve Vahap'ın rakibe 
 
 ### **GM Mustafa Yılmaz ile Oyun (LOSE)**
 
-<iframe style='border: 0;' width='900px' height='600px' src='https://share.chessbase.com/SharedGames/frame/?p=98o5EQR+9ZutHcdV+itUsaCZSBAEA3sZgvNsJJGiCaTSK16vazwBJjvs2tD/5zDQ'></iframe>
+<iframe src="https://lichess.org/embed/game/e3QBWXGH?theme=auto&bg=auto"
+width=700 height=420 frameborder=1></iframe>
 
 GM Mustafa Yılmaz, satranç dünyasında sadece bir büyükusta değil, aynı zamanda bir eğitimci olarak da tanınır. Onunla oynadığım maç, maalesef pek de iyi geçmedi. Büyükustalarla oynarken yaşadığım heyecan ve stres, açılışlarımda ve stratejik planlamamda eksikliklere yol açtı. Bu oyun da çekişmeli geçmedi, çünkü stres nedeniyle taş değişimleri ve konumlar hızla kontrolden çıktı. 16. hamledeki Qxh8 sonrası, rakibim oyunun kontrolünü tamamen ele aldı ve bu noktada maçı kazandı.
 
@@ -54,7 +57,8 @@ GM Mustafa Yılmaz’ın oyun tarzı sabırlı, dikkatli ve her hamleyi büyük 
 
 ### **GM Cem Kaan Gökerkan ile Oyun (LOSE)**
 
-<iframe style='border: 0;' width='900px' height='600px' src='https://share.chessbase.com/SharedGames/frame/?p=98o5EQR+9ZutHcdV+itUsaCZSBAEA3sZgvNsJJGiCaTSK16vazwBJjvs2tD/5zDQ'></iframe>
+<iframe src="https://lichess.org/embed/game/k5xsPneB?theme=auto&bg=auto"
+width=700 height=420 frameborder=1></iframe>
 
 Bu maçta beyaz taşlarla GM Cem Kaan Gökerkan karşısında oynadım ve açıkçası, oyun başlar başlamaz bana baskıyı hissettirdi. Kendisi özellikle İtalyan Açılışı ve Sicilya Savunması üzerine güçlü oyunlar ortaya koyan bir büyükusta. Ama benim en çok dikkatimi çeken şey, onun saldırı temposunu çok iyi ayarlaması ve rakibine hiç nefes aldırmaması.
 
@@ -64,7 +68,8 @@ Oyun benim için erken bir yenilgiyle bitti ama Cem Kaan’ın konumsal farkınd
 
 ### **FM Selim Çıtak ile Oyun (WIN)**
 
-<iframe style='border: 0;' width='900px' height='600px' src='https://share.chessbase.com/SharedGames/frame/?p=98o5EQR+9ZutHcdV+itUsaCZSBAEA3sZgvNsJJGiCaToDP3vqtCyjnk7y6uPphAM'></iframe>
+<iframe src="https://lichess.org/embed/game/DqG6FQsZ?theme=auto&bg=auto#0"
+width=700 height=420 frameborder=1></iframe>
 
 Bu maç, benim için özel bir anlam taşıyor çünkü FM Selim Çıtak karşısında oynadığım dört oyundan üçünü kaybettikten sonra, dördüncüde Şah Gambiti’ni denemeye karar verdim. Açıkçası, bu maçtan hemen önce Joseph Henry Blackburne’ün oyunlarını izleyip iyice gaza gelmiştim. Blackburne’ün saldırgan ve derin hesaplara dayanan cesur oyun tarzı, özellikle romantik satranç tarzını seven biri olarak bana hep ilham vermiştir. Bu yüzden, bu sefer klasik ve temkinli bir oyun yerine, rakibimi baştan itibaren dinamik ve sürekli tehditler yaratan bir oyunla sıkıştırmaya çalıştım.
 
@@ -76,7 +81,8 @@ Bu galibiyet, benim için sadece bir oyunu kazanmak değil, aynı zamanda kendi 
 
 ### **GM Cemil Can Ali Marandi ile Oyun (LOSE)**
 
-<iframe style='border: 0;' width='900px' height='600px' src='https://share.chessbase.com/SharedGames/frame/?p=98o5EQR+9ZutHcdV+itUsaCZSBAEA3sZgvNsJJGiCaQjaiGpWPShW4wguFo8mgG8'></iframe>
+<iframe src="https://lichess.org/embed/game/1fzBsvW7?theme=auto&bg=auto"
+width=700 height=420 frameborder=1></iframe>
 
 Bu oyunda, Grandmaster Cemilcan karşısında, rakibin deneyimi ve hesap gücü çok belirgin şekilde fark yaratmıştı. İlk başta, açılışın standartlarına uygun bir şekilde devam etmeye çalıştım. Ancak Cemilcan'ın hızlı gelişimi ve satranç tahtasında yaptığı planlı manevralar, özellikle orta oyun sürecinde benim kontrolümü zorlaştırdı.
 
@@ -88,7 +94,8 @@ Bu tür maçlarda, rakibin stratejik düşünme yeteneği ve detaylara gösterdi
 
 ### **WFM Andreea Cristina Nastase ile Oyun (WIN)**
 
-<iframe style='border: 0;' width='900px' height='600px' src='https://share.chessbase.com/SharedGames/frame/?p=98o5EQR+9ZutHcdV+itUsaCZSBAEA3sZgvNsJJGiCaSuoB2Gyg0V37k1nLjRbfa/'></iframe>
+<iframe src="https://lichess.org/embed/game/zUCZ3DNz?theme=auto&bg=auto#64"
+width=700 height=420 frameborder=1></iframe>
 
 Bu oyun, oldukça dikkatli bir şekilde oynanan bir Kabul Edilmeyen Vezir Gambiti açılışıyla başladı.Oyunu Siyahlar ve beyazlar olarak anlatıcam çünkü yendiğim kişi bir WFM :). Beyazlar açılışta stratejik bir şekilde taşlarını geliştirerek merkeze baskı yapmaya çalıştı, ancak siyahlar sabırlı bir şekilde karşılık verdi. Beyazlar, açılıştaki birkaç küçük hamle hatasıyla pozisyonel zayıflıklar yarattı. Siyahlar bu zayıflıkları hızla fark etti ve doğru bir şekilde gelişmeye devam etti.
 

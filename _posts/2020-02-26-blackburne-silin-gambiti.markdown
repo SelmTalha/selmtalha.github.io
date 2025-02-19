@@ -2,7 +2,7 @@
 title: "Blackburne Şilin Gambiti"
 layout: post
 date: 2020-02-26 19:23
-image: "/assets/blog/blackburne.png"
+image: "https://selmtalha.github.io/assets/blog/blackburne.png"
 headerImage: true   
 tag: [joseph henry blackburne , kara ölüm , şilin gambiti ,satranç , chess ,chess master , chess history, büyük usta ,mindsport , gameofkings]
 category: Satranç

@@ -4,7 +4,7 @@ layout: post
 date: 2017-09-09 12:45
 tag: [.bashrc nedir,.bashrc,terminal yazı rengi,bash,betik dilleri,terminal ls background color,terminal yazı arkaplanı kaldırma,linux,elementary os,eos,ubuntu,]
 headerImage: true
-image: "/assets/blog/terminalbackls6.jpg"
+image: "https://selmtalha.github.io/assets/blog/terminalbackls6.jpg"
 projects: true
 description: "How to turn of background color with ls "
 category: [Teknoloji,Linux]
