@@ -177,12 +177,42 @@
 
         async function loadMarkdown() {
             const slug = getQueryParam('slug') || 'ruy-lopez';
-            const basePath = typeof getBasePath === 'function' ? getBasePath() : '';
-            const path = `${basePath}/posts/${slug}.md`;
+            
+            // Determine base path
+            let basePath = '';
+            if (typeof getBasePath === 'function') {
+                basePath = getBasePath();
+            }
+            
+            // Try relative path first (works for user/organization pages)
+            // Then try with base path (works for project pages)
+            const paths = [
+                `posts/${slug}.md`,  // Relative path
+                basePath ? `${basePath}/posts/${slug}.md` : null,  // With base path
+                `/posts/${slug}.md`  // Absolute path as last resort
+            ].filter(p => p !== null);
+            
+            let md = null;
+            let lastError = null;
+            
+            for (const path of paths) {
+                try {
+                    const res = await fetch(path, { cache: 'no-cache' });
+                    if (res.ok) {
+                        md = await res.text();
+                        break; // Success, exit loop
+                    }
+                } catch (err) {
+                    lastError = err;
+                    continue; // Try next path
+                }
+            }
+            
+            if (!md) {
+                throw new Error(`Markdown dosyası yüklenemedi. Denenen yollar: ${paths.join(', ')}`);
+            }
+            
             try {
-                const res = await fetch(path, { cache: 'no-cache' });
-                if (!res.ok) throw new Error('Dosya bulunamadı');
-                const md = await res.text();
                 const { meta, body } = parseFrontMatter(md);
 
                 // Header bindings
@@ -222,9 +252,11 @@
                   localStorage.setItem('sdc-tags', JSON.stringify(stored));
                 } catch {}
                 setupShare(meta);
-        feather.replace();
+                feather.replace();
             } catch (err) {
-                document.getElementById('markdown-content').innerHTML = `<p class="text-red-300">İçerik yüklenemedi: ${path}</p>`;
+                const errorMsg = md ? err.message : `Markdown dosyası yüklenemedi. Denenen yollar: ${paths.join(', ')}`;
+                document.getElementById('markdown-content').innerHTML = `<p class="text-red-300">İçerik yüklenemedi: ${errorMsg}</p>`;
+                console.error('Markdown yükleme hatası:', err);
             }
         }
 

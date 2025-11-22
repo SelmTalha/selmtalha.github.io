@@ -1,21 +1,23 @@
 // Base path helper for GitHub Pages
 function getBasePath() {
-    const path = window.location.pathname;
-    // If path is like /repository-name/ or /repository-name/index.html
-    // Extract the base path
-    // For root domain (username.github.io), return empty string
-    // For project pages (username.github.io/repo-name/), return /repo-name
-    const parts = path.split('/').filter(p => p);
-    // If we're at root or index.html at root, no base path needed
-    if (parts.length === 0 || (parts.length === 1 && parts[0] === 'index.html')) {
+    const pathname = window.location.pathname;
+    // Remove leading and trailing slashes, then split
+    const parts = pathname.replace(/^\/|\/$/g, '').split('/').filter(p => p);
+    
+    // If pathname is just '/' or empty, we're at root (user/organization page)
+    if (parts.length === 0) {
         return '';
     }
-    // Check if first part is an HTML file (like index.html, about.html)
-    // If so, we're at root level
+    
+    // If first part is an HTML file, we're at root level
+    // (e.g., /blog-post.html or /index.html)
     if (parts[0].endsWith('.html')) {
         return '';
     }
-    // Otherwise, first part is likely the repository name
+    
+    // If first part doesn't end with .html, it's likely a repository name
+    // (e.g., /repo-name/blog-post.html or /repo-name/)
+    // Return the repository name as base path
     return '/' + parts[0];
 }
 
