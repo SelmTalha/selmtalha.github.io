@@ -18,7 +18,7 @@
     
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <link rel="canonical" href="https://selimtalha.com/yazilim-blog.html">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
@@ -51,16 +51,16 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/components.js"></script>
-    <script src="js/blog.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/js/components.js"></script>
+    <script src="/js/blog.js"></script>
+    <script src="/js/main.js"></script>
     <script>
         initVantaBackground('waves');
         const devPosts = [
-            { title: '"Failed to Start Load Kernel Modules" Hatası Çözümü', date: '2025-03-10', readingTime: '6 dk okuma', image: 'img/terminalbackls3.jpg', imageAlt: 'Linux Sistem', href: 'blog-post.html?slug=failed-to-start-load-kernel-modules-solved', excerpt: 'Linux sistemlerde kernel modül yükleme hatasının çözüm yöntemleri.', tags: ['Linux', 'Sistem', 'Hata', 'Çözüm'] },
-            { title: 'Linux Dosya Sistemi Rehberi', date: '2025-03-08', readingTime: '14 dk okuma', image: 'img/terminalbackls2.jpg', imageAlt: 'Linux Dosya Sistemi', href: 'blog-post.html?slug=linux-dosya-sistemi', excerpt: 'Linux dosya sistemi yapısı, komutları ve pratik kullanım örnekleri.', tags: ['Linux', 'Dosya Sistemi', 'Sistem', 'Yönetim'] },
-            { title: 'Linux Sources.list D Hatası Çözümü', date: '2025-03-05', readingTime: '5 dk okuma', image: 'img/terminalbackls.jpg', imageAlt: 'APT Paket Yöneticisi', href: 'blog-post.html?slug=linux-sources-list-d-hatasi', excerpt: 'Debian/Ubuntu sistemlerde sources.list D hatasının çözüm yöntemleri.', tags: ['Linux', 'APT', 'Paket Yöneticisi', 'Hata'] },
-            { title: 'Terminal Yazı Rengi Değiştirme Rehberi', date: '2025-03-03', readingTime: '7 dk okuma', image: 'img/terminalbackls5.jpg', imageAlt: 'Terminal', href: 'blog-post.html?slug=terminal-yazi-rengi-degistirme', excerpt: 'Linux terminalinde yazı renklerini değiştirme ve özelleştirme yöntemleri.', tags: ['Linux', 'Terminal', 'Renk', 'Özelleştirme'] }
+            { title: '"Failed to Start Load Kernel Modules" Hatası Çözümü', date: '2025-03-10', readingTime: '6 dk okuma', image: '/img/terminalbackls3.jpg', imageAlt: 'Linux Sistem', href: '/blog-post.html?slug=failed-to-start-load-kernel-modules-solved', excerpt: 'Linux sistemlerde kernel modül yükleme hatasının çözüm yöntemleri.', tags: ['Linux', 'Sistem', 'Hata', 'Çözüm'] },
+            { title: 'Linux Dosya Sistemi Rehberi', date: '2025-03-08', readingTime: '14 dk okuma', image: '/img/terminalbackls2.jpg', imageAlt: 'Linux Dosya Sistemi', href: '/blog-post.html?slug=linux-dosya-sistemi', excerpt: 'Linux dosya sistemi yapısı, komutları ve pratik kullanım örnekleri.', tags: ['Linux', 'Dosya Sistemi', 'Sistem', 'Yönetim'] },
+            { title: 'Linux Sources.list D Hatası Çözümü', date: '2025-03-05', readingTime: '5 dk okuma', image: '/img/terminalbackls.jpg', imageAlt: 'APT Paket Yöneticisi', href: '/blog-post.html?slug=linux-sources-list-d-hatasi', excerpt: 'Debian/Ubuntu sistemlerde sources.list D hatasının çözüm yöntemleri.', tags: ['Linux', 'APT', 'Paket Yöneticisi', 'Hata'] },
+            { title: 'Terminal Yazı Rengi Değiştirme Rehberi', date: '2025-03-03', readingTime: '7 dk okuma', image: '/img/terminalbackls5.jpg', imageAlt: 'Terminal', href: '/blog-post.html?slug=terminal-yazi-rengi-degistirme', excerpt: 'Linux terminalinde yazı renklerini değiştirme ve özelleştirme yöntemleri.', tags: ['Linux', 'Terminal', 'Renk', 'Özelleştirme'] }
         ];
         BlogRenderer.render({ containerId: 'posts-container', paginationId: 'pagination', posts: devPosts, pageSize: 4 });
     </script>
