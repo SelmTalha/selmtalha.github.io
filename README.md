@@ -1,3 +1,4 @@
+# Posts
 # Selim's Digital Chronicle - Statik Website
 
 Modern ve modüler bir statik HTML/CSS/JavaScript website yapısı.
