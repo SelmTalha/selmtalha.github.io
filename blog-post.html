@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <meta id="meta-desc" name="description" content="">
@@ -187,30 +188,46 @@
             // Try relative path first (works for user/organization pages)
             // Then try with base path (works for project pages)
             const paths = [
-                `posts/${slug}.md`,  // Relative path
+                `posts/${slug}.md`,  // Relative path (most common for GitHub Pages)
                 basePath ? `${basePath}/posts/${slug}.md` : null,  // With base path
+                `./posts/${slug}.md`,  // Explicit relative path
                 `/posts/${slug}.md`  // Absolute path as last resort
             ].filter(p => p !== null);
             
             let md = null;
             let lastError = null;
+            let successfulPath = null;
+            
+            console.log('Base path:', basePath);
+            console.log('Trying paths:', paths);
             
             for (const path of paths) {
                 try {
+                    console.log('Attempting to fetch:', path);
                     const res = await fetch(path, { cache: 'no-cache' });
+                    console.log('Response status:', res.status, 'for path:', path);
                     if (res.ok) {
                         md = await res.text();
+                        successfulPath = path;
+                        console.log('Successfully loaded from:', path);
                         break; // Success, exit loop
+                    } else {
+                        console.warn('Failed to load from:', path, 'Status:', res.status);
                     }
                 } catch (err) {
+                    console.error('Error fetching', path, ':', err);
                     lastError = err;
                     continue; // Try next path
                 }
             }
             
             if (!md) {
-                throw new Error(`Markdown dosyası yüklenemedi. Denenen yollar: ${paths.join(', ')}`);
+                const errorDetails = `Markdown dosyası yüklenemedi. Denenen yollar: ${paths.join(', ')}`;
+                console.error(errorDetails);
+                throw new Error(errorDetails);
             }
+            
+            console.log('Markdown loaded successfully from:', successfulPath);
             
             try {
                 const { meta, body } = parseFrontMatter(md);
