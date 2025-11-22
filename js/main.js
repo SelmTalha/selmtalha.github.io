@@ -32,8 +32,8 @@ function initVantaBackground(type = 'waves') {
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0x5b21b6,
-        shininess: 50.00,
+        color: "#29003d",
+        shininess: 20.00,
         waveHeight: 15.00,
         waveSpeed: 0.75,
         zoom: 0.80

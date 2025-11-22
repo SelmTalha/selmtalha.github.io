@@ -79,12 +79,22 @@
 /* Category Button Styles */
 .category-btn {
     transition: all 0.3s ease;
+    background: rgba(31, 41, 55, 0.8);
+    color: #e5e7eb;
+    border: 1px solid rgba(75, 85, 99, 0.5);
+}
+
+.category-btn:hover {
+    background: rgba(55, 65, 81, 0.9);
+    border-color: rgba(99, 102, 241, 0.5);
+    color: white;
 }
 
 .category-btn.active {
     background: linear-gradient(135deg, #6366f1, #a855f7);
     color: white;
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    border-color: rgba(99, 102, 241, 0.6);
 }
 
 /* Masonry Grid */
