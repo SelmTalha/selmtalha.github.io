@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kura Uygulaması</title>
+    <link rel="stylesheet" href="css/cekilis.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Kura Uygulaması</h1>
+        <div class="input-group">
+            <label for="participantCount">Kaç kişilik çekiliş?</label>
+            <input type="number" id="participantCount" min="1" required>
+            <button id="generateInputs">Inputları Oluştur</button>
+        </div>
+        <div id="participantInputs"></div>
+        <div class="input-group">
+            <label for="winnerCount">Kaç kişi kazanacak?</label>
+            <input type="number" id="winnerCount" min="1" required>
+            <button id="drawLottery">Çekilişi Yap</button>
+        </div>
+        <div id="results"></div>
+    </div>
+    <script src="js/cekilis.js"></script>
+</body>
+</html>

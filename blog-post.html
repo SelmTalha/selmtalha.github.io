@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yazı | SDC</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <meta id="meta-desc" name="description" content="">
+    <meta id="meta-tags" name="keywords" content="">
+    <meta property="og:type" content="article">
+    <meta id="og-title" property="og:title" content="Yazı">
+    <meta id="og-desc" property="og:description" content="">
+    <meta id="og-url" property="og:url" content="">
+    <script type="application/ld+json" id="post-jsonld"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-gray-900 text-white">
+    <div class="app-loader"><div class="loader-shape"><div class="sq s1"></div><div class="sq s2"></div><div class="sq s3"></div></div></div>
+    <div id="vanta-bg" class="fixed inset-0 z-0"></div>
+    <div class="relative z-10 min-h-screen flex flex-col">
+        <!-- Navbar Container -->
+        <div id="navbar-container"></div>
+
+        <!-- Main Content -->
+        <main class="flex-grow px-4 sm:px-6 lg:px-8 py-12">
+            <article class="max-w-3xl mx-auto">
+                <!-- Article Header -->
+                <div class="mb-12">
+                    <div class="flex items-center justify-center space-x-4 text-sm text-gray-400 mb-6">
+                        <div class="flex items-center">
+                            <i data-feather="calendar" class="w-4 h-4 mr-2"></i>
+                            <span id="post-date">-</span>
+                        </div>
+                        <span>•</span>
+                        <div class="flex items-center">
+                            <i data-feather="clock" class="w-4 h-4 mr-2"></i>
+                            <span id="post-reading">-</span>
+                        </div>
+                        <span>•</span>
+                        <div class="flex items-center">
+                            <i data-feather="tag" class="w-4 h-4 mr-2"></i>
+                            <span id="post-tag">-</span>
+                        </div>
+                    </div>
+                    <h1 id="post-title" class="text-4xl sm:text-5xl font-bold text-center mb-6">-</h1>
+                    <p id="post-subtitle" class="text-xl text-center text-gray-300 max-w-2xl mx-auto"></p>
+                </div>
+
+                <!-- Article Content -->
+                <div class="bg-gray-800 bg-opacity-70 rounded-xl p-8 sm:p-12 shadow-lg">
+                    <div id="markdown-content" class="markdown-content prose prose-invert max-w-none"></div>
+                </div>
+
+                <!-- Share & Navigation -->
+                <div class="mt-12 flex flex-col sm:flex-row justify-between items-center gap-6">
+                    <a href="chess-blog.html" class="inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors">
+                        <i data-feather="arrow-left" class="mr-2 w-4 h-4"></i>
+                        Tüm Yazılara Dön
+                    </a>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-gray-400 text-sm">Paylaş:</span>
+                        <a id="share-twitter" href="#" class="text-gray-400 hover:text-indigo-400 transition-colors" rel="noopener" target="_blank">
+                            <i data-feather="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a id="share-facebook" href="#" class="text-gray-400 hover:text-indigo-400 transition-colors" rel="noopener" target="_blank">
+                            <i data-feather="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a id="share-linkedin" href="#" class="text-gray-400 hover:text-indigo-400 transition-colors" rel="noopener" target="_blank">
+                            <i data-feather="linkedin" class="w-5 h-5"></i>
+                        </a>
+                        <a id="share-copy" href="#" class="text-gray-400 hover:text-indigo-400 transition-colors">
+                            <i data-feather="link" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Author Section -->
+                <div class="mt-12 bg-gradient-to-r from-indigo-600/30 to-purple-600/30 rounded-xl p-6 border border-indigo-500/20">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                            S
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Selim Talha Çağlar</h3>
+                            <p class="text-gray-300 mb-3">
+                                Bilgisayar programcısı ve tutkulu satranç oyuncusu. Teknoloji ve stratejik düşünme konularında yazılar paylaşıyorum.
+                            </p>
+                            <a href="about.html" class="text-indigo-400 hover:text-indigo-300 text-sm inline-flex items-center">
+                                Daha fazla bilgi
+                                <i data-feather="arrow-right" class="ml-1 w-3 h-3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <!-- Footer Container -->
+        <div id="footer-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        initVantaBackground('waves');
+
+        function getQueryParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        function parseFrontMatter(md) {
+            // Minimal YAML-like front matter parser: expects ---\nkey: value\n...\n--- at top
+            if (!md.startsWith('---')) return { meta: {}, body: md };
+            const end = md.indexOf('\n---', 3);
+            if (end === -1) return { meta: {}, body: md };
+            const raw = md.slice(3, end).trim();
+            const body = md.slice(end + 4).trimStart();
+            const meta = {};
+            raw.split(/\r?\n/).forEach(line => {
+                const m = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+                if (m) meta[m[1]] = m[2];
+            });
+            return { meta, body };
+        }
+
+        function trDate(dateStr) {
+            try {
+                const d = new Date(dateStr);
+                return d.toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' });
+            } catch { return dateStr; }
+        }
+
+        function setupShare(meta) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(meta.title || document.title || 'Yazı');
+            const text = encodeURIComponent(meta.subtitle || '');
+            const twitter = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+            const facebook = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            const linkedin = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}&summary=${text}&source=SDC`;
+            const aTw = document.getElementById('share-twitter');
+            const aFb = document.getElementById('share-facebook');
+            const aLi = document.getElementById('share-linkedin');
+            const aCp = document.getElementById('share-copy');
+            if (aTw) aTw.href = twitter;
+            if (aFb) aFb.href = facebook;
+            if (aLi) aLi.href = linkedin;
+            if (aCp) {
+                aCp.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    try {
+                        await navigator.clipboard.writeText(window.location.href);
+                        aCp.classList.add('text-green-400');
+                        setTimeout(()=>aCp.classList.remove('text-green-400'), 1000);
+                    } catch {}
+                });
+            }
+            // Web Share API (mobil)
+            if (navigator.share) {
+                const container = document.querySelector('.mt-12 .flex.items-center.space-x-4');
+                if (container) {
+                    container.addEventListener('click', (e) => {
+                        const isIcon = e.target.closest('a');
+                        if (!isIcon) {
+                            navigator.share({ title: meta.title || 'Yazı', text: meta.subtitle || '', url: window.location.href }).catch(()=>{});
+                        }
+                    });
+                }
+            }
+        }
+
+        async function loadMarkdown() {
+            const slug = getQueryParam('slug') || 'ruy-lopez';
+            const path = `posts/${slug}.md`;
+            try {
+                const res = await fetch(path, { cache: 'no-cache' });
+                if (!res.ok) throw new Error('Dosya bulunamadı');
+                const md = await res.text();
+                const { meta, body } = parseFrontMatter(md);
+
+                // Header bindings
+                document.getElementById('post-title').textContent = meta.title || 'Yazı';
+                document.title = `${meta.title || 'Yazı'} | SDC`;
+                document.getElementById('post-date').textContent = meta.date ? trDate(meta.date) : '-';
+                document.getElementById('post-reading').textContent = meta.reading || '-';
+                document.getElementById('post-tag').textContent = meta.tag || '-';
+                if (meta.subtitle) document.getElementById('post-subtitle').textContent = meta.subtitle;
+
+                document.getElementById('markdown-content').innerHTML = marked.parse(body);
+                // SEO meta & OG & JSON-LD
+                const desc = meta.subtitle || (body.substring(0, 160).replace(/\n/g,' ').trim());
+                const url = window.location.href;
+                const tagsStr = (meta.tags || meta.tag || '').toString();
+                const tagArray = tagsStr ? tagsStr.split(',').map(s=>s.trim()).filter(Boolean) : (meta.tag ? [meta.tag] : []);
+                document.getElementById('meta-desc').setAttribute('content', desc);
+                document.getElementById('meta-tags').setAttribute('content', tagArray.join(', '));
+                document.getElementById('og-title').setAttribute('content', meta.title || 'Yazı');
+                document.getElementById('og-desc').setAttribute('content', desc);
+                document.getElementById('og-url').setAttribute('content', url);
+                const jsonld = {
+                  "@context": "https://schema.org",
+                  "@type": "Article",
+                  "headline": meta.title || 'Yazı',
+                  "datePublished": meta.date || '',
+                  "author": { "@type": "Person", "name": "Selim Talha Çağlar" },
+                  "keywords": tagArray.join(', '),
+                  "description": desc,
+                  "mainEntityOfPage": url
+                };
+                document.getElementById('post-jsonld').textContent = JSON.stringify(jsonld);
+                // Persist tags for index cloud
+                try {
+                  const stored = JSON.parse(localStorage.getItem('sdc-tags')||'{}');
+                  tagArray.forEach(t=>{ stored[t] = (stored[t]||0)+1; });
+                  localStorage.setItem('sdc-tags', JSON.stringify(stored));
+                } catch {}
+                setupShare(meta);
+        feather.replace();
+            } catch (err) {
+                document.getElementById('markdown-content').innerHTML = `<p class="text-red-300">İçerik yüklenemedi: ${path}</p>`;
+            }
+        }
+
+        loadMarkdown();
+    </script>
+</body>
+</html>

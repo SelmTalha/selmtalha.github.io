@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yazılım Blogu | SDC - Selim Talha</title>
+    <meta name="description" content="Linux sistem yönetimi, terminal kullanımı, kernel modülleri ve sistem hatalarının çözümü hakkında yazılım yazıları.">
+    <meta name="keywords" content="Linux, sistem yönetimi, terminal, kernel modülleri, sistem hataları, yazılım, programlama, teknoloji">
+    <meta name="author" content="Selim Talha">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Yazılım Blogu | SDC - Selim Talha">
+    <meta property="og:description" content="Linux sistem yönetimi, terminal kullanımı ve sistem hatalarının çözümü hakkında yazılım yazıları.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://selimtalha.com/yazilim-blog.html">
+    <meta property="og:image" content="https://selimtalha.com/img/software-og.jpg">
+    
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="canonical" href="https://selimtalha.com/yazilim-blog.html">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-gray-900 text-white">
+    <div class="app-loader"><div class="loader-shape"><div class="sq s1"></div><div class="sq s2"></div><div class="sq s3"></div></div></div>
+    <div id="vanta-bg" class="fixed inset-0 z-0"></div>
+    <div class="relative z-10 min-h-screen flex flex-col">
+        <!-- Navbar Container -->
+        <div id="navbar-container"></div>
+
+        <!-- Main Content -->
+        <main class="flex-grow px-4 sm:px-6 lg:px-8 py-12">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Yazılım Blogu</h1>
+                    <p class="text-lg text-gray-300">Web, performans, mimari ve geliştirici deneyimi üzerine notlar</p>
+                </div>
+                
+                <!-- Blog Posts (dynamic) -->
+                <div id="posts-container"></div>
+                <!-- Pagination -->
+                <div id="pagination"></div>
+            </div>
+        </main>
+
+        <!-- Footer Container -->
+        <div id="footer-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/components.js"></script>
+    <script src="js/blog.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        initVantaBackground('waves');
+        const devPosts = [
+            { title: '"Failed to Start Load Kernel Modules" Hatası Çözümü', date: '2025-03-10', readingTime: '6 dk okuma', image: 'img/terminalbackls3.jpg', imageAlt: 'Linux Sistem', href: 'blog-post.html?slug=failed-to-start-load-kernel-modules-solved', excerpt: 'Linux sistemlerde kernel modül yükleme hatasının çözüm yöntemleri.', tags: ['Linux', 'Sistem', 'Hata', 'Çözüm'] },
+            { title: 'Linux Dosya Sistemi Rehberi', date: '2025-03-08', readingTime: '14 dk okuma', image: 'img/terminalbackls2.jpg', imageAlt: 'Linux Dosya Sistemi', href: 'blog-post.html?slug=linux-dosya-sistemi', excerpt: 'Linux dosya sistemi yapısı, komutları ve pratik kullanım örnekleri.', tags: ['Linux', 'Dosya Sistemi', 'Sistem', 'Yönetim'] },
+            { title: 'Linux Sources.list D Hatası Çözümü', date: '2025-03-05', readingTime: '5 dk okuma', image: 'img/terminalbackls.jpg', imageAlt: 'APT Paket Yöneticisi', href: 'blog-post.html?slug=linux-sources-list-d-hatasi', excerpt: 'Debian/Ubuntu sistemlerde sources.list D hatasının çözüm yöntemleri.', tags: ['Linux', 'APT', 'Paket Yöneticisi', 'Hata'] },
+            { title: 'Terminal Yazı Rengi Değiştirme Rehberi', date: '2025-03-03', readingTime: '7 dk okuma', image: 'img/terminalbackls5.jpg', imageAlt: 'Terminal', href: 'blog-post.html?slug=terminal-yazi-rengi-degistirme', excerpt: 'Linux terminalinde yazı renklerini değiştirme ve özelleştirme yöntemleri.', tags: ['Linux', 'Terminal', 'Renk', 'Özelleştirme'] }
+        ];
+        BlogRenderer.render({ containerId: 'posts-container', paginationId: 'pagination', posts: devPosts, pageSize: 4 });
+    </script>
+</body>
+</html>
+
+

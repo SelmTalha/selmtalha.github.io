@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotoğraf Galerisi | SDC</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-gray-900 text-white">
+    <div class="app-loader"><div class="loader-shape"><div class="sq s1"></div><div class="sq s2"></div><div class="sq s3"></div></div></div>
+    <div id="vanta-bg" class="fixed inset-0 z-0"></div>
+    <div class="relative z-10 min-h-screen flex flex-col">
+        <!-- Navbar Container -->
+        <div id="navbar-container"></div>
+
+        <!-- Main Content -->
+        <main class="flex-grow px-4 sm:px-6 lg:px-8 py-12">
+            <div class="max-w-7xl mx-auto">
+                <!-- Hero Section -->
+                <div class="text-center mb-16">
+                    <div class="flex items-center justify-center mb-6">
+                        <i data-feather="camera" class="w-16 h-16 text-indigo-400"></i>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+                        Fotoğraf <span class="bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">Galerisi</span>
+                    </h1>
+                    <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                        Doğanın güzelliklerini ve anların büyüsünü objektifimle yakalıyorum
+                    </p>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12">
+                    <button onclick="filterGallery('all')" class="category-btn active px-6 py-2 rounded-tl-[5px] rounded-br-[5px] bg-gray-800/70 text-white font-medium">
+                        <i data-feather="grid" class="w-4 h-4 inline mr-2"></i>
+                        Tümü
+                    </button>
+                    <button onclick="filterGallery('landscape')" class="category-btn px-6 py-2 rounded-tl-[5px] rounded-br-[5px] bg-gray-800/70 text-white font-medium">
+                        <i data-feather="mountain" class="w-4 h-4 inline mr-2"></i>
+                        Manzara
+                    </button>
+                    <button onclick="filterGallery('macro')" class="category-btn px-6 py-2 rounded-tl-[5px] rounded-br-[5px] bg-gray-800/70 text-white font-medium">
+                        <i data-feather="droplet" class="w-4 h-4 inline mr-2"></i>
+                        AI
+                    </button>
+                    <button onclick="filterGallery('wildlife')" class="category-btn px-6 py-2 rounded-tl-[5px] rounded-br-[5px] bg-gray-800/70 text-white font-medium">
+                        <i data-feather="feather" class="w-4 h-4 inline mr-2"></i>
+                        Yaban Hayatı
+                    </button>
+                    <button onclick="filterGallery('night')" class="category-btn px-6 py-2 rounded-tl-[5px] rounded-br-[5px] bg-gray-800/70 text-white font-medium">
+                        <i data-feather="moon" class="w-4 h-4 inline mr-2"></i>
+                        Gece
+                    </button>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div id="gallery" class="masonry-grid">
+                    <!-- Manzara Photos -->
+                    <div class="gallery-item rounded-xl shadow-lg" data-category="landscape" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="Dağ Manzarası">
+                        <div class="overlay">
+                            <h3 class="text-lg font-bold mb-1">Dağ Silüeti</h3>
+                            <p class="text-sm text-gray-300">Kaçkar Dağları, Rize</p>
+                            <div class="flex items-center mt-2 text-xs text-gray-400">
+                                <i data-feather="aperture" class="w-3 h-3 mr-1"></i>
+                                <span>f/8 • 1/500s • ISO 200</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item rounded-xl shadow-lg" data-category="landscape" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800" alt="Orman Yolu">
+                        <div class="overlay">
+                            <h3 class="text-lg font-bold mb-1">Sonbahar Yolu</h3>
+                            <p class="text-sm text-gray-300">Yedigöller, Bolu</p>
+                            <div class="flex items-center mt-2 text-xs text-gray-400">
+                                <i data-feather="aperture" class="w-3 h-3 mr-1"></i>
+                                <span>f/5.6 • 1/250s • ISO 100</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item rounded-xl shadow-lg" data-category="landscape" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800" alt="Göl Manzarası">
+                        <div class="overlay">
+                            <h3 class="text-lg font-bold mb-1">Sakin Göl</h3>
+                            <p class="text-sm text-gray-300">Abant Gölü, Bolu</p>
+                            <div class="flex items-center mt-2 text-xs text-gray-400">
+                                <i data-feather="aperture" class="w-3 h-3 mr-1"></i>
+                                <span>f/11 • 1/125s • ISO 100</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Makro Photos -->
+                    <div class="gallery-item rounded-xl shadow-lg" data-category="macro" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800" alt="Çiçek Makro">
+                        <div class="overlay">
+                            <h3 class="text-lg font-bold mb-1">Çiy Damlaları</h3>
+                            <p class="text-sm text-gray-300">Sabah Işığı</p>
+                            <div class="flex items-center mt-2 text-xs text-gray-400">
+                                <i data-feather="aperture" class="w-3 h-3 mr-1"></i>
+                                <span>f/2.8 • 1/1000s • ISO 400</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item rounded-xl shadow-lg" data-category="macro" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1469259943454-aa100abba749?w=800" alt="Yaprak Detayı">
+                        <div class="overlay">
+                            <h3 class="text-lg font-bold mb-1">Yaprak Damarları</h3>
+                            <p class="text-sm text-gray-300">Doğa Detayları</p>
+                            <div class="flex items-center mt-2 text-xs text-gray-400">
+                                <i data-feather="aperture" class="w-3 h-3 mr-1"></i>
+                                <span>f/4 • 1/500s • ISO 200</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wildlife Photos -->
+                    <div class="gallery-item rounded-xl shadow-lg" data-category="wildlife" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1535083783855-76ae62b2914e?w=800" alt="Kuş">
+                        <div class="overlay">
+                            <h3 class="text-lg font-bold mb-1">Özgür Kanat</h3>
+                            <p class="text-sm text-gray-300">Martı - İstanbul</p>
+                            <div class="flex items-center mt-2 text-xs text-gray-400">
+                                <i data-feather="aperture" class="w-3 h-3 mr-1"></i>
+                                <span>f/5.6 • 1/2000s • ISO 800</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item rounded-xl shadow-lg" data-category="wildlife" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1484406566174-9da000fda645?w=800" alt="Sincap">
+                        <div class="overlay">
+                            <h3 class="text-lg font-bold mb-1">Orman Sakini</h3>
+                            <p class="text-sm text-gray-300">Sincap - Belgrad Ormanı</p>
+                            <div class="flex items-center mt-2 text-xs text-gray-400">
+                                <i data-feather="aperture" class="w-3 h-3 mr-1"></i>
+                                <span>f/4 • 1/500s • ISO 400</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Night Photos -->
+                    <div class="gallery-item rounded-xl shadow-lg" data-category="night" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800" alt="Yıldızlar">
+                        <div class="overlay">
+                            <h3 class="text-lg font-bold mb-1">Samanyolu</h3>
+                            <p class="text-sm text-gray-300">Uludağ, Bursa</p>
+                            <div class="flex items-center mt-2 text-xs text-gray-400">
+                                <i data-feather="aperture" class="w-3 h-3 mr-1"></i>
+                                <span>f/2.8 • 25s • ISO 3200</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item rounded-xl shadow-lg" data-category="night" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1514897575457-c4db467cf78e?w=800" alt="Şehir Işıkları">
+                        <div class="overlay">
+                            <h3 class="text-lg font-bold mb-1">Işıltılı Şehir</h3>
+                            <p class="text-sm text-gray-300">İstanbul Silueti</p>
+                            <div class="flex items-center mt-2 text-xs text-gray-400">
+                                <i data-feather="aperture" class="w-3 h-3 mr-1"></i>
+                                <span>f/8 • 10s • ISO 800</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item rounded-xl shadow-lg" data-category="landscape" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800" alt="Gün Batımı">
+                        <div class="overlay">
+                            <h3 class="text-lg font-bold mb-1">Altın Saatler</h3>
+                            <p class="text-sm text-gray-300">Pamukkale, Denizli</p>
+                            <div class="flex items-center mt-2 text-xs text-gray-400">
+                                <i data-feather="aperture" class="w-3 h-3 mr-1"></i>
+                                <span>f/16 • 1/60s • ISO 100</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item rounded-xl shadow-lg" data-category="macro" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=800" alt="Kelebek">
+                        <div class="overlay">
+                            <h3 class="text-lg font-bold mb-1">Renkli Kanatlar</h3>
+                            <p class="text-sm text-gray-300">Kelebek - Bahçe</p>
+                            <div class="flex items-center mt-2 text-xs text-gray-400">
+                                <i data-feather="aperture" class="w-3 h-3 mr-1"></i>
+                                <span>f/3.5 • 1/800s • ISO 400</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item rounded-xl shadow-lg" data-category="wildlife" onclick="openModal(this)">
+                        <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=800" alt="Geyik">
+                        <div class="overlay">
+                            <h3 class="text-lg font-bold mb-1">Ormanın Kralı</h3>
+                            <p class="text-sm text-gray-300">Geyik - Doğa Parkı</p>
+                            <div class="flex items-center mt-2 text-xs text-gray-400">
+                                <i data-feather="aperture" class="w-3 h-3 mr-1"></i>
+                                <span>f/5.6 • 1/1000s • ISO 640</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="bg-gray-800/70 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-indigo-400 mb-2">500+</div>
+                        <div class="text-gray-300">Fotoğraf</div>
+                    </div>
+                    <div class="bg-gray-800/70 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-purple-400 mb-2">25+</div>
+                        <div class="text-gray-300">Lokasyon</div>
+                    </div>
+                    <div class="bg-gray-800/70 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-pink-400 mb-2">3</div>
+                        <div class="text-gray-300">Yıl Deneyim</div>
+                    </div>
+                    <div class="bg-gray-800/70 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-orange-400 mb-2">12</div>
+                        <div class="text-gray-300">Ödül</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer Container -->
+        <div id="footer-container"></div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="modal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-white bg-gray-900/80 rounded-full p-3 hover:bg-gray-800 transition-colors z-50">
+                <i data-feather="x" class="w-6 h-6"></i>
+            </button>
+            <button onclick="prevImage()" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-gray-900/80 rounded-full p-3 hover:bg-gray-800 transition-colors z-50">
+                <i data-feather="chevron-left" class="w-6 h-6"></i>
+            </button>
+            <button onclick="nextImage()" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-gray-900/80 rounded-full p-3 hover:bg-gray-800 transition-colors z-50">
+                <i data-feather="chevron-right" class="w-6 h-6"></i>
+            </button>
+            <img id="modal-image" src="" alt="">
+            <div class="text-center mt-4 text-white">
+                <h3 id="modal-title" class="text-2xl font-bold mb-2"></h3>
+                <p id="modal-location" class="text-gray-300 mb-2"></p>
+                <p id="modal-settings" class="text-sm text-gray-400"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/gallery.js"></script>
+    <script>
+        initVantaBackground('waves');
+    </script>
+</body>
+</html>

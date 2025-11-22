@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Yılan Oyunu - Level Sistemi</title>
+  <link rel="stylesheet" href="css/snake.css">
+</head>
+<body>
+  <main class="wrap">
+    <h1>SNAKE GAME</h1>
+
+    <div class="hud">
+      <div class="panel">Skor: <span id="score">0</span></div>
+      <div class="panel">Seviye: <span id="level">1</span></div>
+      <div class="panel">Hız: <span id="speed">—</span></div>
+      <div class="controls">
+        <button id="restart">Yeniden Başlat</button>
+        <button id="pauseBtn">Duraklat</button>
+      </div>
+    </div>
+
+    <div class="game-area">
+      <canvas id="game" width="600" height="600"></canvas>
+      <div class="msg" id="message">Yön tuşları veya WASD ile oyna. Her yem +20 puan. Kuyruğa çarpınca kaybedersin.</div>
+    </div>
+
+    <footer class="hint">Not-1: 1. seviye ısınma turudur engel yoktur. 2. seviyede eklenen duvarlara çarparsan ölürsün!><br>Not-2: 1.Seviye ve diğer seviyelerde kendi kuyruğuna dokunmakta kaybettirir!</footer>
+  </main>
+
+  <script src="js/snake.js"></script>
+</body>
+</html>

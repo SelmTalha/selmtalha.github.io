@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SDC Satranç Turnuva Eşlendirme</title>
+
+<!-- Vue 3 -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<!-- html2pdf (tarayıcı fontları ile PDF; Türkçe karakterler tarayıcı fontlarıyla gelir) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+<style>
+  :root{--bg:#f4f6fb;--card:#fff;--accent:#0b5ed7;--ok:#16a34a;--muted:#6b7280;}
+  *{box-sizing:border-box}
+  body{font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;background:var(--bg);margin:0;color:#0f172a;}
+  #app{max-width:1100px;margin:28px auto;padding:20px;background:var(--card);border-radius:12px;box-shadow:0 10px 20px rgba(2,6,23,0.08);box-shadow: 0 10px 20px rgb(5, 25, 116);}
+  h1{margin:0 0 6px;text-align:center}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+  input[type="text"]{padding:10px 12px;border-radius:8px;border:1px solid #e6eef8;width:240px}
+  button{background:var(--accent);color:white;border:none;padding:9px 12px;border-radius:8px;cursor:pointer}
+  button.ghost{background:transparent;color:var(--accent);border:1px solid #cfe0ff}
+  button.ok{background:var(--ok)}
+  .players{margin-top:10px}
+  ul{list-style:none;padding:0;margin:0}
+  li.player{display:flex;justify-content:space-between;padding:8px 10px;border-radius:8px;background:#fbfdff;margin-bottom:8px;align-items:center}
+  .meta{font-size:13px;color:var(--muted)}
+  .panel{margin:12px 0}
+  .table-wrapper{overflow:auto;margin-top:10px;border-radius:8px}
+  table{width:100%;border-collapse:collapse}
+  th,td{padding:8px 10px;border-bottom:1px solid #163fc5;text-align:center}
+  th{background:#203a20a8}
+  .actions{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+  .small{font-size:13px;padding:6px 8px}
+  .center{text-align:center}
+  .round-card{margin-top:12px;padding:12px;border-radius:10px;background:#f7f8fa}
+  @media (max-width:700px){
+    input[type="text"]{width:100%}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <h1 style="  font-family: 'Audiowide';
+  font-size: 2.5rem;
+  font-weight: 400;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  color: #000000; /* cyber tarzı mavi */
+  transform: skewX(-8deg);">SDC</h1><h1 style="font-family: 'Audiowide', sans-serif;">  Satranç Turnuva Eşlendirme Uygulaması <br> Buchholz + SB + DE + AVJ</h1><br>
+
+  <div class="controls">
+    <input v-model="newPlayer" placeholder="Oyuncu adı (ör. Selim)" @keyup.enter="addPlayer"/>
+    <button @click="addPlayer">Oyuncu Ekle</button>
+    <button class="ghost" style="padding:8px;border-radius:8px; cursor:pointer;background-color: #a00909;color: white;" @click="resetAll" @click="resetAll">Sıfırla</button>
+    <button class="ghost" style="padding:8px;border-radius:8px; cursor:pointer;background-color: #4d9c57;color: white;" @click="resetAll" @click="exportJSON">JSON Dışa Aktar</button>
+    <label class="ghost small" style="padding:8px;border-radius:8px; cursor:pointer;background-color: #4d9c57;color: white;">
+      <input type="file" accept=".json" @change="importJSON" style="display:none"/> JSON Yükle
+    </label>
+    <button @click="startTournament" :disabled="tournamentStarted" class="small">Turnuvayı Başlat</button>
+    <button @click="exportPDF" :disabled="!rounds.length" class="small">PDF Kaydet</button>
+  </div>
+
+  <div class="panel players">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div><strong>Oyuncular ({{players.length}})</strong></div>
+      <div class="meta">Minimum 6 ile başlayabilir</div>
+    </div>
+    <ul>
+      <li v-for="p in players" :key="p.name" class="player">
+        <div>
+          <strong>{{p.name}}</strong>
+          <div class="meta">Puan: {{formatScore(p.score)}} — Buchholz: {{formatNum(p.buchholz)}} — SB: {{formatNum(p.sb)}} — Averaj: {{formatNum(p.averaj)}}</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="small" @click="removePlayer(p.name)">Sil</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div v-if="rounds.length" class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div><strong>Tur Listesi ({{rounds.length}})</strong></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button @click="toggleStandings" class="small">Tur Sonuçlarını Göster/Gizle</button>
+      </div>
+    </div>
+
+    <div v-for="round in rounds" :key="round.number" class="round-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div><strong>Tur {{round.number}}</strong> <span class="meta">({{round.completed ? 'Tamamlandı' : 'Açık'}})</span></div>
+        <div class="meta">Eşleşmeler: {{round.matches.length}}</div>
+      </div>
+
+      <div class="table-wrapper" style="margin-top:8px;background-color: #a9f8a96c;">
+        <table>
+          <thead><tr><th>#</th><th>Beyaz</th><th>Siyah</th><th>Renk</th><th>Sonuç</th></tr></thead>
+          <tbody>
+            <tr v-for="(m,i) in round.matches" :key="i">
+              <td>{{i+1}}</td>
+              <td>{{m.white}}</td>
+              <td>{{m.black}}</td>
+              <td>{{m.whiteColor}} / {{m.blackColor}}</td>
+              <td>
+                <select v-model="m.result">
+                  <option value="">Seç</option>
+                  <option value="1-0">1-0</option>
+                  <option value="0-1">0-1</option>
+                  <option value="1/2-1/2">½-½</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button @click="applyResults" :disabled="!canApplyResults" class="ok">Skorları Uygula (Sonraki Tur)</button>
+      <button @click="forceCompleteRound" :disabled="!lastRound" class="ghost">Turu Tamamla (skor yoksa)</button>
+    </div>
+  </div>
+
+  <div v-if="showStandings" class="panel">
+    <h3 class="center">Genel Sıralama (Puan → Buchholz → SB → Direct Encounter)</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>#</th><th>İsim</th><th>Puan</th><th>Buchholz</th><th>SB</th><th>Averaj (Toplam)</th></tr></thead>
+        <tbody>
+          <tr v-for="(p,idx) in sortedPlayersWithDE" :key="p.name">
+            <td>{{idx+1}}</td>
+            <td>{{p.name}}</td>
+            <td>{{formatScore(p.score)}}</td>
+            <td>{{formatNum(p.buchholz)}}</td>
+            <td>{{formatNum(p.sb)}}</td>
+            <td>{{formatNum(p.averaj)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="margin-top:18px;text-align:center;color:var(--muted);font-size:13px">
+    <div>Not: Her tur sonrası "Skorları Uygula" dedikten sonra Buchholz, SB ve Averaj (Toplam) güncellenir. Direct Encounter eşitliği çözerse o kural uygulanır.</div>
+  </div>
+</div>
+
+<script>
+const { createApp } = Vue;
+
+createApp({
+  data(){
+    return {
+      newPlayer: '',
+      players: [],   // {name, score, buchholz, sb, averaj, played: [opName...], playedResults: [{opponent, result}], colorHistory: []}
+      rounds: [],    // {number, matches: [{white,black,whiteColor,blackColor,result}], completed}
+      showStandings: false
+    }
+  },
+  computed: {
+    tournamentStarted(){ return this.rounds.length > 0 },
+    lastRound(){ return this.rounds.length ? this.rounds[this.rounds.length-1] : null },
+    lastRoundCompleted(){ return !this.lastRound ? true : this.lastRound.completed },
+    canApplyResults(){
+      if(!this.lastRound) return false;
+      return this.lastRound.matches.length > 0 && this.lastRound.matches.every(m => m.result);
+    },
+    // Sorted by tie-breaks (without direct encounter applied yet)
+    sortedPlayers(){
+      return [...this.players].sort((a,b)=>{
+        if(b.score !== a.score) return b.score - a.score;
+        if(b.buchholz !== a.buchholz) return b.buchholz - a.buchholz;
+        if(b.sb !== a.sb) return b.sb - a.sb;
+        return a.name.localeCompare(b.name,'tr');
+      });
+    },
+    // Apply Direct Encounter tiebreak where appropriate (pairwise)
+    sortedPlayersWithDE(){
+      const arr = this.sortedPlayers.slice();
+      // For groups of equal (score,buchholz,sb) apply direct encounter
+      let i = 0;
+      while(i < arr.length){
+        // find group with same score,buchholz,sb
+        const grp = [arr[i]];
+        let j = i+1;
+        while(j < arr.length && arr[j].score === arr[i].score && arr[j].buchholz === arr[i].buchholz && arr[j].sb === arr[i].sb){
+          grp.push(arr[j]); j++;
+        }
+        if(grp.length > 1){
+          // sort group by direct encounter if exists; otherwise keep order
+          grp.sort((x,y)=>{
+            // find head-to-head result where they played each other
+            const xPlayed = (x.playedResults || []).find(r => r.opponent === y.name);
+            const yPlayed = (y.playedResults || []).find(r => r.opponent === x.name);
+            if(xPlayed && xPlayed.result !== yPlayed?.result){
+              // if x beat y, x higher
+              if(xPlayed.result === 1 && yPlayed && yPlayed.result === 0) return -1;
+              if(xPlayed.result === 0 && yPlayed && yPlayed.result === 1) return 1;
+            }
+            // else fallback to name
+            return x.name.localeCompare(y.name,'tr');
+          });
+          // replace arr segment
+          for(let k=0;k<grp.length;k++) arr[i+k] = grp[k];
+        }
+        i = j;
+      }
+      return arr;
+    }
+  },
+  methods: {
+    formatNum(n){ return Number.isFinite(n) ? n.toFixed(2) : '0.00'; },
+    formatScore(s){ return Number.isFinite(s) ? (s%1===0? s.toString()+'.0' : s.toString()) : '0' },
+
+    addPlayer(){
+      const name = this.newPlayer.trim();
+      if(!name) return;
+      if(this.players.some(p=>p.name === name)){ alert('Aynı isim zaten var'); this.newPlayer=''; return; }
+      this.players.push({ name, score:0, buchholz:0, sb:0, averaj:0, played:[], playedResults:[], colorHistory:[] });
+      this.newPlayer = '';
+    },
+    removePlayer(name){
+      if(!confirm(`${name} silinsin mi?`)) return;
+      this.players = this.players.filter(p=>p.name !== name);
+    },
+    resetAll(){
+      if(!confirm('Tüm veriler silinecek. Emin misin?')) return;
+      this.players = []; this.rounds = []; this.showStandings = false;
+    },
+
+    startTournament(){
+      if(this.players.length < 6){ alert('Minimum 6 oyuncu gerekli!'); return; }
+      if(this.rounds.length){ alert('Turnuva zaten başladı'); return; }
+      // reset stats
+      this.players.forEach(p => { p.score = 0; p.buchholz = 0; p.sb = 0; p.averaj = 0; p.played = []; p.playedResults = []; p.colorHistory = []; });
+      this.createRound();
+    },
+
+    createRound(){
+      if(this.players.length < 2) return;
+      // sort players into score groups
+      const pool = [...this.players].sort((a,b)=>{
+        if(b.score !== a.score) return b.score - a.score;
+        if(b.buchholz !== a.buchholz) return b.buchholz - a.buchholz;
+        if(b.sb !== a.sb) return b.sb - a.sb;
+        return a.name.localeCompare(b.name,'tr');
+      });
+
+      const groups = {};
+      pool.forEach(p => {
+        const key = p.score;
+        if(!groups[key]) groups[key] = [];
+        groups[key].push(p);
+      });
+
+      const groupScores = Object.keys(groups).map(Number).sort((a,b)=>b-a);
+      let pairs = [];
+      const leftovers = [];
+
+      // pair within groups greedily avoiding previous opponents
+      for(const s of groupScores){
+        const arr = groups[s];
+        const taken = new Set();
+        for(let i=0;i<arr.length;i++){
+          if(taken.has(arr[i].name)) continue;
+          let found = -1;
+          for(let j=i+1;j<arr.length;j++){
+            if(taken.has(arr[j].name)) continue;
+            if(!arr[i].played.includes(arr[j].name)){ found = j; break; }
+          }
+          if(found === -1){
+            for(let j=i+1;j<arr.length;j++){
+              if(taken.has(arr[j].name)) continue;
+              found = j; break;
+            }
+          }
+          if(found !== -1){
+            const a = arr[i], b = arr[found];
+            taken.add(a.name); taken.add(b.name);
+            pairs.push([a,b]);
+          }
+        }
+        // push unpaired into leftovers
+        arr.forEach(x => { if(!taken.has(x.name)) leftovers.push(x); });
+      }
+
+      // pair leftovers across groups
+      const used = new Set();
+      for(let i=0;i<leftovers.length;i++){
+        const p = leftovers[i];
+        if(used.has(p.name)) continue;
+        let foundIdx = -1;
+        for(let j=i+1;j<leftovers.length;j++){
+          const q = leftovers[j];
+          if(used.has(q.name)) continue;
+          if(!p.played.includes(q.name)){ foundIdx = j; break; }
+        }
+        if(foundIdx === -1){
+          for(let j=i+1;j<leftovers.length;j++){
+            const q = leftovers[j];
+            if(used.has(q.name)) continue;
+            foundIdx = j; break;
+          }
+        }
+        if(foundIdx !== -1){
+          const q = leftovers[foundIdx];
+          pairs.push([p,q]);
+          used.add(p.name); used.add(q.name);
+        }
+      }
+
+      // finalize matches with color assignment trying to avoid same color twice
+      const finalMatches = pairs.map(pair => {
+        const [p,q] = pair;
+        const pLast = p.colorHistory.slice(-1)[0];
+        const qLast = q.colorHistory.slice(-1)[0];
+        let white = p, black = q;
+        if(pLast === 'W' && qLast !== 'W'){ white = q; black = p; }
+        else if(qLast === 'W' && pLast !== 'W'){ white = p; black = q; }
+        else {
+          if(Math.random() > 0.5){ white = q; black = p; } else { white = p; black = q; }
+        }
+
+        // update played and colorHistory on real players
+        const realP = this.players.find(x=>x.name === p.name);
+        const realQ = this.players.find(x=>x.name === q.name);
+        if(!realP.played.includes(realQ.name)) realP.played.push(realQ.name);
+        if(!realQ.played.includes(realP.name)) realQ.played.push(realP.name);
+        realP.colorHistory.push(white.name === realP.name ? 'W' : 'B');
+        realQ.colorHistory.push(white.name === realQ.name ? 'W' : 'B');
+
+        return {
+          white: white.name,
+          black: black.name,
+          whiteColor: 'W',
+          blackColor: 'B',
+          result: ''
+        };
+      });
+
+      const roundNumber = this.rounds.length + 1;
+      this.rounds.push({ number: roundNumber, matches: finalMatches, completed: false });
+    },
+
+    applyResults(){
+      if(!this.lastRound || !this.canApplyResults) return;
+      // ensure playedResults exists
+      this.players.forEach(p => { if(!p.playedResults) p.playedResults = []; });
+
+      // apply results and push playedResults
+      this.lastRound.matches.forEach(m => {
+        const w = this.players.find(p => p.name === m.white);
+        const b = this.players.find(p => p.name === m.black);
+        if(!w || !b) return;
+        if(m.result === '1-0'){
+          w.score += 1;
+          w.playedResults.push({ opponent: b.name, result: 1 });
+          b.playedResults.push({ opponent: w.name, result: 0 });
+        } else if(m.result === '0-1'){
+          b.score += 1;
+          w.playedResults.push({ opponent: b.name, result: 0 });
+          b.playedResults.push({ opponent: w.name, result: 1 });
+        } else if(m.result === '1/2-1/2'){
+          w.score += 0.5;
+          b.score += 0.5;
+          w.playedResults.push({ opponent: b.name, result: 0.5 });
+          b.playedResults.push({ opponent: w.name, result: 0.5 });
+        }
+      });
+
+      // recalc Buchholz & SB & Averaj (we define Averaj = buchholz + sb)
+      this.players.forEach(player => {
+        // Buchholz = sum of opponents' scores (current)
+        let buch = 0;
+        if(player.played && player.played.length){
+          player.played.forEach(opName => {
+            const opp = this.players.find(p => p.name === opName);
+            if(opp) buch += opp.score;
+          });
+        }
+        player.buchholz = buch;
+
+        // SB = sum(opponent.score for wins) + 0.5 * sum(opponent.score for draws)
+        let sb = 0;
+        if(player.playedResults && player.playedResults.length){
+          player.playedResults.forEach(pr => {
+            const opp = this.players.find(p => p.name === pr.opponent);
+            if(!opp) return;
+            if(pr.result === 1) sb += opp.score;
+            else if(pr.result === 0.5) sb += 0.5 * opp.score;
+          });
+        }
+        player.sb = sb;
+
+        // Averaj toplam = buchholz + sb (as you requested to present combined metric)
+        player.averaj = player.buchholz + player.sb;
+      });
+
+      // mark round completed and create next round
+      this.lastRound.completed = true;
+      if(this.players.length >= 2) this.createRound();
+    },
+
+    forceCompleteRound(){
+      if(!this.lastRound) return;
+      this.lastRound.completed = true;
+      if(this.players.length >= 2) this.createRound();
+    },
+
+    toggleStandings(){ this.showStandings = !this.showStandings; },
+
+    /* ---------- PDF via html2pdf (browser fonts -> Türkçe OK) ---------- */
+    exportPDF(){
+      const container = document.createElement('div');
+      container.style.fontFamily = 'Arial, Helvetica, sans-serif';
+      container.style.padding = '10px';
+      const title = document.createElement('h2'); title.innerText = 'Turnuva Raporu'; container.appendChild(title);
+
+      this.rounds.forEach(r => {
+        const rh = document.createElement('h3'); rh.innerText = `Tur ${r.number} (${r.completed ? 'Tamamlandı' : 'Açık'})`; container.appendChild(rh);
+        const tbl = document.createElement('table'); tbl.style.width='100%'; tbl.style.borderCollapse='collapse';
+        let header = `<tr><th style="border:1px solid #ddd;padding:6px">#</th><th style="border:1px solid #ddd;padding:6px">Beyaz</th><th style="border:1px solid #ddd;padding:6px">Siyah</th><th style="border:1px solid #ddd;padding:6px">Sonuç</th></tr>`;
+        let rows = '';
+        r.matches.forEach((m,i) => {
+          rows += `<tr><td style="border:1px solid #ddd;padding:6px">${i+1}</td><td style="border:1px solid #ddd;padding:6px">${m.white}</td><td style="border:1px solid #ddd;padding:6px">${m.black}</td><td style="border:1px solid #ddd;padding:6px">${m.result || '-'}</td></tr>`;
+        });
+        tbl.innerHTML = header + rows;
+        container.appendChild(tbl);
+      });
+
+      const sh = document.createElement('h3'); sh.innerText = 'Genel Sıralama'; container.appendChild(sh);
+      const stbl = document.createElement('table'); stbl.style.width='100%'; stbl.style.borderCollapse='collapse';
+
+      let sHeader = `<tr><th style="border:1px solid #ddd;padding:6px">#</th><th style="border:1px solid #ddd;padding:6px">İsim</th><th style="border:1px solid #ddd;padding:6px">Puan</th><th style="border:1px solid #ddd;padding:6px">Buchholz</th><th style="border:1px solid #ddd;padding:6px">SB</th></tr>`;
+      let sRows = '';
+      this.sortedPlayers.forEach((p,i) => {
+        sRows += `<tr><td style="border:1px solid #ddd;padding:6px">${i+1}</td><td style="border:1px solid #ddd;padding:6px">${p.name}</td><td style="border:1px solid #ddd;padding:6px">${p.score}</td><td style="border:1px solid #ddd;padding:6px">${p.buchholz.toFixed(2)}</td><td style="border:1px solid #ddd;padding:6px">${p.sb.toFixed(2)}</td></tr>`;
+      });
+      stbl.innerHTML = sHeader + sRows;
+      container.appendChild(stbl);
+
+      const opt = {
+        margin: 10,
+        filename: 'turnuva-raporu.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(container).save();
+    },
+
+    /* ---------- JSON export/import ---------- */
+    exportJSON(){
+      const data = { players: this.players, rounds: this.rounds };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'turnuva.json'; a.click();
+      URL.revokeObjectURL(url);
+    },
+    importJSON(e){
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        try{
+          const obj = JSON.parse(ev.target.result);
+          if(!obj.players || !obj.rounds){
+            if(obj.players && confirm('Sadece oyuncu listesi bulundu. Yine de yüklemek ister misin?')) {
+              this.players = obj.players.map(p => ({
+                name: p.name,
+                score: Number(p.score) || 0,
+                buchholz: Number(p.buchholz) || 0,
+                sb: Number(p.sb) || 0,
+                averaj:Number(p.averaj) || 0,
+                played: p.played || [],
+                colorHistory: p.colorHistory || [],
+                playedResults: p.playedResults || []
+              }));
+            } else { alert('Beklenen formatta JSON yok'); }
+            return;
+          }
+          this.players = obj.players.map(p => ({
+            name: p.name,
+            score: Number(p.score) || 0,
+            buchholz: Number(p.buchholz) || 0,
+            sb: Number(p.sb) || 0,
+            averaj: Number(p.averaj) || 0,
+            played: p.played || [],
+            colorHistory: p.colorHistory || [],
+            playedResults: p.playedResults || []
+          }));
+          this.rounds = obj.rounds || [];
+          alert('Turnuva JSON başarıyla yüklendi.');
+        }catch(err){
+          alert('JSON okunamadı: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    }
+  }
+}).mount('#app');
+</script>
+</body>
+</html>

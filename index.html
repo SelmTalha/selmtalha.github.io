@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDC | Selim Talha Çağlar</title>
+    <meta name="description" content="Selim Talha'nın kişisel web sitesi. Yazılım geliştirme, satranç yazıları, fotoğraf galerisi ve projeler hakkında içerikler.">
+    <meta name="keywords" content="Selim Talha, yazılım geliştirici, satranç, fotoğraf, blog, projeler, Linux, Python, web geliştirme">
+    <meta name="author" content="Selim Talha">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="SDC - Selim Talha | Yazılım Geliştirici, Satranç Meraklısı ve Fotoğrafçı">
+    <meta property="og:description" content="Selim Talha'nın kişisel web sitesi. Yazılım geliştirme, satranç yazıları, fotoğraf galerisi ve projeler hakkında içerikler.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://selimtalha.com">
+    <meta property="og:image" content="https://selimtalha.com/img/og-image.jpg">
+    <meta property="og:site_name" content="SDC">
+    <meta property="og:locale" content="tr_TR">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SDC - Selim Talha | Yazılım Geliştirici, Satranç Meraklısı ve Fotoğrafçı">
+    <meta name="twitter:description" content="Selim Talha'nın kişisel web sitesi. Yazılım geliştirme, satranç yazıları, fotoğraf galerisi ve projeler hakkında içerikler.">
+    <meta name="twitter:image" content="https://selimtalha.com/img/twitter-card.jpg">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#5b21b6">
+    <meta name="msapplication-TileColor" content="#5b21b6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="canonical" href="https://selimtalha.com">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Selim Talha",
+        "url": "https://selimtalha.com",
+        "description": "Yazılım geliştirici, satranç meraklısı ve amatör fotoğrafçı",
+        "jobTitle": "Yazılım Geliştirici",
+        "knowsAbout": ["Yazılım Geliştirme", "Satranç", "Fotoğrafçılık", "Linux", "Python", "Web Geliştirme"],
+        "sameAs": [
+            "https://github.com/selimtalha",
+            "https://linkedin.com/in/selimtalha"
+        ],
+        "hasOccupation": {
+            "@type": "Occupation",
+            "name": "Yazılım Geliştirici",
+            "occupationLocation": {
+                "@type": "Country",
+                "name": "Türkiye"
+            }
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-gray-900 text-white">
+    <div class="app-loader"><div class="loader-shape"><div class="sq s1"></div><div class="sq s2"></div><div class="sq s3"></div></div></div>
+    <div id="vanta-bg" class="fixed inset-0 z-0"></div>
+    <div class="relative z-10 min-h-screen flex flex-col">
+        <!-- Navbar Container -->
+        <div id="navbar-container"></div>
+
+        <!-- Main Content -->
+        <main class="flex-grow flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
+            <div class="max-w-2xl w-full text-center">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+                    <span id="typewriter" class="font-mono"></span><span class="typewriter-cursor"></span>
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-300 mb-12">
+                    ✓ Yazılım geliştiricisi, satranç meraklısı ve amatör fotoğrafçı.
+                </p>
+                
+
+                <!-- Menu Buttons -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <a href="chess-blog.html" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-4 transition-all transform hover:scale-105 flex flex-col items-center shadow-lg hover:shadow-xl shadow-indigo-500/30 hover:shadow-indigo-500/50 rounded-tl-[5px]" style="grid-column: span 2;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"></path>
+                            <path d="M12 7v6"></path>
+                            <path d="M9 10h6"></path>
+                        </svg>
+                        <span>Satranç Yazılarım</span>
+                    </a>
+                    
+                    <a href="photograph-gallery.html" class="bg-yellow-600 hover:bg-yellow-700 text-white py-3 px-4 transition-all transform hover:scale-105 flex flex-col items-center shadow-lg hover:shadow-xl shadow-yrlloe-600/30 hover:shadow-yellow-700/50 rounded-tl-[5px]" style="grid-column: span 2;">
+                        <i data-feather="camera" class="w-6 h-6 mb-2"></i>
+                        <span>Fotoğraf Galerim</span>
+                    </a>
+                    
+                    <a href="yazilim-blog.html" class="bg-red-500 hover:bg-red-600 text-white py-3 px-4 transition-all transform hover:scale-105 flex flex-col items-center shadow-lg hover:shadow-xl shadow-red-500/30 hover:shadow-red-600/50 rounded-tl-[5px]" style="grid-column: span 2;">
+                        <i data-feather="user" class="w-6 h-6 mb-2"></i>
+                        <span>Yazılım</span>
+                    </a>
+
+                    <a href="projects.html" class="bg-orange-600 hover:bg-orange-700 text-white py-3 px-4 transition-all transform hover:scale-105 flex flex-col items-center shadow-lg hover:shadow-xl shadow-orange-500/30 hover:shadow-orange-500/50 rounded-tl-[5px]" style="grid-column: span 2;">
+                        <i data-feather="user" class="w-6 h-6 mb-2"></i>
+                        <span>Projelerim</span>
+                    </a>
+
+                    <a href="about.html" class="bg-purple-800 hover:bg-purple-900 text-white py-3 px-4 transition-all transform hover:scale-105 flex flex-col items-center shadow-lg hover:shadow-xl shadow-purple-800/30 hover:shadow-purple-900/50 rounded-tl-[5px]" style="grid-column: span 2;">
+                        <i data-feather="user" class="w-6 h-6 mb-2"></i>
+                        <span>Hakkımda</span>
+                    </a>
+
+                    <a href="contact.html" class="bg-green-600 hover:bg-green-700 text-white py-3 px-4 transition-all transform hover:scale-105 flex flex-col items-center shadow-lg hover:shadow-xl shadow-green-600/30 hover:shadow-green-700/50 rounded-tl-[5px]" style="grid-column: span 2;">
+                        <i data-feather="user" class="w-6 h-6 mb-2"></i>
+                        <span>İLetişim</span>
+                    </a>
+                    
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer Container -->
+        <div id="footer-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Vanta.js background
+        VANTA.NET({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x5b21b6,
+            shininess: 150.00,
+            waveHeight: 20.00,
+            waveSpeed: 0.50,
+            zoom: 0.75
+        });
+        
+        // Typewriter effect
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+            
+            var typed = new Typed('#typewriter', {
+                strings: ["Merhaba,Ben Selim."],
+                typeSpeed: 90,
+                backSpeed: 30,
+                startDelay: 500,
+                loop: true,
+                showCursor: false
+            });
+            // Build tag cloud from localStorage
+            try {
+                const data = JSON.parse(localStorage.getItem('sdc-tags')||'{}');
+                const entries = Object.entries(data).sort((a,b)=>b[1]-a[1]).slice(0,20);
+                const wrap = document.getElementById('tag-cloud');
+                entries.forEach(([tag,count])=>{
+                    const a = document.createElement('a');
+                    a.href = `chess-blog.html#tag=${encodeURIComponent(tag)}`;
+                    a.className = 'px-3 py-1 rounded-full bg-indigo-800/40 hover:bg-indigo-700/60 text-indigo-200 text-sm';
+                    a.textContent = `#${tag}`;
+                    wrap.appendChild(a);
+                });
+            } catch {}
+        });
+    </script>
+</body>
+</html>

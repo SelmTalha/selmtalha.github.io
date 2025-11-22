@@ -1,0 +1,62 @@
+:root{
+      --bg:#290808; /* koyu arka plan bar */
+      --panel:#1a0202;
+      --muted:#a6aaaf;
+      --accent:#5a2323;
+      --surface:#f8fafc;
+      --tool-size:44px;
+    }
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Helvetica,Arial;}
+    body{background:linear-gradient(180deg,#230707 0%, #300606 100%);color:var(--surface);display:flex}
+    .app{display:flex;flex:1;height:100vh;align-items:stretch}
+
+    /* sol toolbar */
+    .toolbar{width:72px;background:var(--panel);display:flex;flex-direction:column;gap:8px;padding:12px;border-right:1px solid rgba(255,255,255,0.03)}
+    .tool{width:var(--tool-size);height:var(--tool-size);border-radius:10px;display:flex;align-items:center;justify-content:center; cursor:pointer;background:transparent;border:1px solid transparent}
+    .tool:hover{background:rgba(255,255,255,0.03)}
+    .tool.active{background:linear-gradient(180deg, rgba(124,58,237,0.14), rgba(124,58,237,0.08));box-shadow:0 6px 20px rgba(124,58,237,0.08);border-color:rgba(124,58,237,0.25)}
+    .tool svg{width:20px;height:20px;fill:var(--surface)}
+
+    /* top bar */
+    .topbar{height:64px;background:transparent;display:flex;gap:8px;align-items:center;padding:12px 18px;border-bottom:1px solid rgba(255,255,255,0.02)}
+    .brand{font-weight:700;color:var(--surface);font-size:18px;margin-right:12px}
+    .controls{display:flex;gap:10px;align-items:center;margin-left:auto}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;cursor:pointer;color:var(--surface)}
+
+    /* right panel */
+    .rightpanel{width:320px;background:linear-gradient(180deg,#1a0303,#1f0303);border-left:1px solid rgba(255,255,255,0.03);padding:14px;display:flex;flex-direction:column;gap:12px}
+    .panel-card{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+    input[type=color]{width:100%;height:40px;border-radius:8px;border:none;padding:0}
+    .range{width:100%}
+
+    /* canvas area */
+    .main{flex:1;display:flex;flex-direction:column}
+    .stage{flex:1;display:flex;align-items:stretch;justify-content:center;padding:18px}
+    .board-wrap{background:#ffffff;border-radius:0 12px 0 12px;box-shadow:0 6px 40px rgb(19, 1, 1);overflow:hidden;display:flex;flex-direction:column}
+    canvas{background:#f8fafc;display:block;box-shadow: 5 5 10px rgb(48, 29, 133);}
+    .status{padding:8px 12px;color:#111827;font-size:13px}
+
+    /* footer tiny */
+    .muted{color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:900px){.rightpanel{display:none}.toolbar{width:56px}}
+
+    #exportPNG ,#exportJSON, #clear{
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.377),
+            0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    #exportPNG:hover{
+        box-shadow: 0 4px 10px rgb(0, 0, 0),
+            0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+    #exportJSON:hover{
+        box-shadow: 0 4px 10px rgb(0, 0, 0),
+            0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+    #clear:hover{
+        box-shadow: 0 4px 10px rgb(0, 0, 0),
+            0 1px 3px rgba(0, 0, 0, 0.08);
+    }

@@ -1,0 +1,90 @@
+    <!doctype html>
+    <html lang="tr">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Akıllı Tahta</title>
+    <link rel="stylesheet" href="css/akillitahta.css">
+    </head>
+    <body>
+    <div class="app">
+        <div class="toolbar" id="toolbar">
+        <div class="tool active" data-tool="select" title="Seç & Taşı">
+            <!-- cursor icon -->
+            <svg viewBox="0 0 24 24"><path d="M3 3l7.5 17L11 13l7-7z"/></svg>
+        </div>
+        <div class="tool" data-tool="pen" title="Kalem">
+            <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        </div>
+        <div class="tool" data-tool="rect" title="Dikdörtgen">
+            <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/></svg>
+        </div>
+        <div class="tool" data-tool="ellipse" title="Elips">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>
+        </div>
+        <div class="tool" data-tool="text" title="Yazı">
+            <svg viewBox="0 0 24 24"><path d="M5 4v3h5.5v12h3V7H19V4z"/></svg>
+        </div>
+        <div class="tool" data-tool="eraser" title="Silgi">
+            <svg viewBox="0 0 24 24"><path d="M16.24 3l4.77 4.77-8.49 8.49-4.77-4.77L16.24 3zM2 20h20v2H2z"/></svg>
+        </div>
+        <div class="tool" data-tool="pan" title="Kaydır">
+            <svg viewBox="0 0 24 24"><path d="M10 3v2H3v7h2V6h5V3h0zM21 13h-2v5h-5v2h7v-7z"/></svg>
+        </div>
+        <div style="flex:1"></div>
+        <div class="tool" id="undo" title="Geri al">
+            <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.86 0 7 3.14 7 7 0 1.03-.2 2.01-.56 2.89l1.46 1.46C21.6 17.33 22 15.71 22 14c0-5.52-4.48-10-10-10z"/></svg>
+        </div>
+        <div class="tool" id="redo" title="Yinele">
+            <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.86 0-7 3.14-7 7 0 1.03.2 2.01.56 2.89L8.1 21.35C6.4 19.6 6 17.98 6 16c0-5.52 4.48-10 10-10z"/></svg>
+        </div>
+        </div>
+
+        <div class="main">
+        <div class="topbar">
+            <div class="brand">SDC-WRTLite</div>
+            <div class="muted">Basit, statik ve offline. Üzerinde çiz ve kaydet — hızlı prototip.</div>
+            <div class="controls">
+            <button class="btn" id="exportPNG">PNG Dışa Aktar</button>
+            <button class="btn" id="exportJSON">JSON Kaydet</button>
+            <button class="btn" id="clear">Temizle</button>
+            </div>
+        </div>
+
+        <div class="stage">
+            <div class="board-wrap" style="width:1000px;height:720px;">
+            <canvas id="board" width="1600" height="1152"></canvas>
+            <div class="status muted" id="status">Araç: <span id="curTool">Seç</span> • Renk: <span id="curColor">#000000</span> • Kalınlık: <span id="curSize">2</span></div>
+            </div>
+        </div>
+        </div>
+
+        <div class="rightpanel">
+        <div class="panel-card">
+            <label>Renk</label>
+            <input type="color" id="color" value="#000000">
+        </div>
+
+        <div class="panel-card">
+            <label>Kalem Kalınlığı</label>
+            <input type="range" id="size" min="1" max="32" value="2" class="range">
+        </div>
+
+        <div class="panel-card">
+            <label>Katman Yönetimi (basit)</label>
+            <div style="display:flex;gap:8px;align-items:center">
+            <button class="btn" id="bringFront">Öne Getir</button>
+            <button class="btn" id="sendBack">Geri Gönder</button>
+            </div>
+            <div class="muted" style="margin-top:8px">Seçili nesne yoksa yoksayılır.</div>
+        </div>
+
+        <div class="panel-card">
+            <label>İpuçları</label>
+            <div class="muted">Araçları sol panelden seç. Yazı ekledikten sonra çift tıkla düzenle.</div>
+        </div>
+        </div>
+    </div>
+    <script src="js/akillitahta.js"></script>
+    </body>
+    </html>
