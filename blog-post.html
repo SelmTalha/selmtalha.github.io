@@ -177,7 +177,8 @@
 
         async function loadMarkdown() {
             const slug = getQueryParam('slug') || 'ruy-lopez';
-            const path = `/posts/${slug}.md`;
+            const basePath = typeof getBasePath === 'function' ? getBasePath() : '';
+            const path = `${basePath}/posts/${slug}.md`;
             try {
                 const res = await fetch(path, { cache: 'no-cache' });
                 if (!res.ok) throw new Error('Dosya bulunamadı');

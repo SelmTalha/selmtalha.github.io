@@ -1,3 +1,24 @@
+// Base path helper for GitHub Pages
+function getBasePath() {
+    const path = window.location.pathname;
+    // If path is like /repository-name/ or /repository-name/index.html
+    // Extract the base path
+    // For root domain (username.github.io), return empty string
+    // For project pages (username.github.io/repo-name/), return /repo-name
+    const parts = path.split('/').filter(p => p);
+    // If we're at root or index.html at root, no base path needed
+    if (parts.length === 0 || (parts.length === 1 && parts[0] === 'index.html')) {
+        return '';
+    }
+    // Check if first part is an HTML file (like index.html, about.html)
+    // If so, we're at root level
+    if (parts[0].endsWith('.html')) {
+        return '';
+    }
+    // Otherwise, first part is likely the repository name
+    return '/' + parts[0];
+}
+
 // Vanta.js Background Initialization
 function initVantaBackground(type = 'waves') {
     const vantaConfig = {
